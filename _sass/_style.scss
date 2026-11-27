@@ -697,6 +697,12 @@ pre code { background: none; border: 0; padding: 0; font-size: 1em; }
 
 @media (max-width: 420px) {
   .grid { grid-template-columns: minmax(0, 1fr); }
+  // Specs stay two-up down to here; four stacked rows wastes a screen.
+  table { font-size: 13px; }
+  tbody td, thead th { padding-right: 8px; }
+}
+
+@media (max-width: 340px) {
   .specs { grid-template-columns: minmax(0, 1fr); }
   .specs div { border-right: 0; border-bottom: 1px solid $line; }
   .specs div:last-child { border-bottom: 0; }
