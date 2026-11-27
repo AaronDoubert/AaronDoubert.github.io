@@ -36,7 +36,7 @@ layout: default
   {%- if proj %}
   <div class="card{% if c.size %} {{ c.size }}{% endif %}">
     <a href="{{ proj.url | relative_url }}">
-      <span class="frame{% if c.photo %} photo{% endif %}">
+      <span class="frame{% if c.photo %} photo{% endif %}{% if c.tone %} tone-{{ c.tone }}{% endif %}">
         <img src="{{ c.img | prepend: '/assets/img/' | relative_url }}" alt="{{ proj.title }}" loading="lazy">
       </span>
       <span class="meta">

@@ -25,7 +25,7 @@ layout: default
 
 {%- if page.hero %}
 <figure class="hero">
-  <span class="frame{% if page.hero.photo %} photo{% endif %}">
+  <span class="frame{% if page.hero.photo %} photo{% endif %}{% if page.hero.tone %} tone-{{ page.hero.tone }}{% endif %}">
     <img src="{{ page.hero.src | prepend: '/assets/img/' | relative_url }}" alt="{{ page.hero.alt }}" loading="eager">
   </span>
   {%- if page.hero.caption %}<figcaption>{{ page.hero.caption }}</figcaption>{% endif %}
@@ -38,7 +38,7 @@ layout: default
 <div class="shots">
   {%- for s in page.shots %}
   <figure{% if s.full %} class="full"{% endif %}>
-    <span class="frame{% if s.photo %} photo{% endif %}">
+    <span class="frame{% if s.photo %} photo{% endif %}{% if s.tone %} tone-{{ s.tone }}{% endif %}">
       <img src="{{ s.src | prepend: '/assets/img/' | relative_url }}" alt="{{ s.alt }}" loading="lazy">
     </span>
     {%- if s.caption %}<figcaption>{{ s.caption }}</figcaption>{% endif %}

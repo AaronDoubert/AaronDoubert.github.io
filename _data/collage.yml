@@ -4,14 +4,16 @@
 #   size  - omit for a one-third tile, or "wide" for a half-width tile.
 #           Keep each row adding up: wide+wide, or three plain tiles.
 #   photo - true for camera photos (fills the tile). Omit for CAD renders.
+#   tone  - 'dark' or 'grey' when the render has its own flat background, so the
+#           frame matches it instead of boxing it in a rectangle.
 #
 # Blank lines below mark where each row breaks, so it's easy to keep the rhythm.
 # Try not to put two tiles from the same project directly above each other.
 
 - { img: cs-flap.jpg,          slug: ailerons-flaps,           size: wide }
-- { img: afc-pcb.jpg,          slug: analog-flight-controller, size: wide }
+- { img: afc-pcb.jpg,          slug: analog-flight-controller, size: wide, tone: dark }
 
-- { img: pl-final.jpg,         slug: payload-winch }
+- { img: pl-final.jpg,         slug: payload-winch, tone: grey }
 - { img: asme-turret.jpg,      slug: asme-turret-battlebot, photo: true }
 - { img: cs-flap-horn.jpg,     slug: ailerons-flaps }
 

@@ -13,6 +13,7 @@ hero:
   src: afc-pcb.jpg
   alt: Rev B board, 90 by 210 mm, 4-layer.
   caption: Rev B — 90 × 210 mm, 4-layer, mounts on the frame.
+  tone: dark
 shots:
   - src: afc-mounting.jpg
     alt: Board on the 5-inch frame with prop disks marked.

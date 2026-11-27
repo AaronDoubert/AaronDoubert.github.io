@@ -11,6 +11,7 @@ hero:
   src: pl-final.jpg
   alt: Final winch on its rail mount.
   caption: Final version on its rail mount.
+  tone: grey
 shots:
   - src: pl-winch-v2.jpg
     alt: Winch with one servo, spool and TPU retention belt.

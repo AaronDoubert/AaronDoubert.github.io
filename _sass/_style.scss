@@ -371,6 +371,20 @@ h2.section::after {
   img { object-fit: cover; padding: 0; }
 }
 
+// Some renders carry their own flat ground (a KiCad board on black, a SolidWorks
+// viewport grey). Match the frame to it so the image bleeds to the edge instead
+// of sitting in the tile as a hard rectangle.
+.frame.tone-dark {
+  background: #0d0e10;
+  border-color: #0d0e10;
+  img { padding: 0; }
+}
+.frame.tone-grey {
+  background: #c2c6cf;
+  border-color: #b3b8c2;
+  img { padding: 0; }
+}
+
 .card > a:hover .frame { border-color: $line-firm; }
 .card > a:hover .frame img { transform: scale(1.028); }
 
