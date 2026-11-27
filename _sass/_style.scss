@@ -654,12 +654,23 @@ pre code { background: none; border: 0; padding: 0; font-size: 1em; }
     gap: 6px 20px;
     margin-top: 18px;
   }
+  // Two compact columns, otherwise the whole project list pushes the page
+  // content below the fold on a phone.
   .side-nav {
-    margin-top: 22px;
-    padding-top: 18px;
+    margin-top: 20px;
+    padding-top: 16px;
     overflow: visible;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 18px;
   }
-  .side-nav a { padding: 7px 0; }
+  .side-nav .lbl { grid-column: 1 / -1; margin-bottom: 6px; }
+  .side-nav a {
+    padding: 5px 0;
+    font-size: 13px;
+    grid-template-columns: 19px 1fr;
+    gap: 6px;
+  }
   .side-foot { display: none; }
 
   .content { padding: 38px 0 80px; }
