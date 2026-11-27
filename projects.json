@@ -1,0 +1,190 @@
+{
+  "_README": "Everything on the site comes from this file. Edit it, then run:  python tools/build.py",
+
+  "site": {
+    "name": "Aaron Doubert",
+    "role": "Mechanical engineering<br>Purdue University · Dec 2027",
+    "location": "West Lafayette, IN",
+    "email": "adoubert@purdue.edu",
+    "linkedin": "https://www.linkedin.com/in/aaron-doubert",
+    "github": "https://github.com/AaronDoubert",
+    "resume": "",
+    "footer": "© 2026 Aaron Doubert",
+    "lead": "Mechanical engineering at Purdue, graduating December 2027.",
+    "lead_sub": "Control surfaces and mechanism design for Purdue Aerial Robotics, analog flight control electronics, and competition robots."
+  },
+
+  "projects": [
+    {
+      "slug": "ailerons-flaps",
+      "title": "PART ailerons and flaps",
+      "summary": "Hinge-moment sizing and printed construction for a 95 m/s airframe.",
+      "context": "Purdue Aerial Robotics",
+      "when": "Fall 2026",
+      "tools": "Onshape, Python",
+      "status": "In progress",
+      "current": "PART · Fall 2026",
+      "body": [
+        { "h": "Servo sizing" },
+        { "p": "Hinge moments from a linearized thin-airfoil flap model (Roskam Part VI) at FAR 23 load factors — n = 10/3 rolling, n = 2 flaps down. Ruddervator modelled as a flat plate at its total angle to the flow, including an 8 m/s gust." },
+        { "table": {
+            "head": ["Surface", "Worst case", "Servo torque"],
+            "rows": [
+              ["Aileron", "95 m/s, 25° trailing edge down", "13.5 kgf·cm"],
+              ["Ruddervator", "95 m/s, 25°, 8 m/s gust", "10.2 kgf·cm"],
+              ["Flap", "40 m/s, 40° down", "4.1 kgf·cm"]
+            ] } },
+        { "h": "Construction" },
+        { "p": "Printed shells with internal triangular ribs, turning on a bronze sleeve bushing at the hinge line. Control horn bolts on with M2 screws into heat-set inserts." }
+      ],
+      "shots": [
+        { "img": "cs-flap.jpg",          "cap": "Flap shell, inside face — triangular ribs carrying load into the hinge line.", "size": "wide" },
+        { "img": "cs-flap-horn.jpg",     "cap": "Horn end — control horn, hinge bushing, M2 screw into a heat-set insert." },
+        { "img": "cs-flap-xray.jpg",     "cap": "Skin made see-through — ribs, inserts and horn together." },
+        { "img": "cs-aileron-xray.jpg",  "cap": "Aileron, skin see-through — ribs, bronze hinge bushing, heat-set inserts." },
+        { "img": "cs-aileron-hinge.jpg", "cap": "Aileron hinge end — bushing and M2 screws into heat-set inserts." },
+        { "img": "cs-aileron.jpg",       "cap": "Aileron construction." },
+        { "img": "cs-flap-section.jpg",  "cap": "Flap end view — hinge eye and overlapping skin." },
+        { "img": "cs-in-wing.jpg",       "cap": "Aileron placed in the wing structure.", "size": "wide" }
+      ]
+    },
+    {
+      "slug": "analog-flight-controller",
+      "title": "Analog flight controller",
+      "summary": "Quadcopter PID loops computed in op-amps, not firmware.",
+      "context": "Personal project",
+      "when": "2026",
+      "tools": "KiCad, Simulink, ATtiny",
+      "status": "In progress",
+      "current": "Next rev shipping",
+      "repo": "https://github.com/AaronDoubert/quadcopter-pid-boards",
+      "body": [
+        { "p": "Angle-to-rate loops on roll and pitch, rate-only on yaw, fed by an MPU-6050 through an ATtiny1614 and MCP4822 DACs. Board history: v1 → rev A → rev B, plus an SMT variant." },
+        { "note": "Rev 3 is failing on the bench. Write up what failed and what the next rev changes, and this note goes away." }
+      ],
+      "shots": [
+        { "img": "afc-pcb.jpg",      "cap": "Rev B — 90 × 210 mm, 4-layer, mounts on the frame.", "tone": "dark", "size": "wide" },
+        { "img": "afc-mounting.jpg", "cap": "Board on the 5-inch frame; dashed circles are the prop disks. Every trimpot stays reachable." },
+        { "img": "afc-shim.jpg",     "cap": "Digital shim on a breadboard — MPU-6050 into an ATtiny and DACs, probed with an Analog Discovery 3.", "photo": true },
+        { "img": "afc-roll-model.jpg", "cap": "Roll axis as a Simscape circuit model of the board." },
+        { "img": "afc-roll-step.jpg",  "cap": "Simulated roll step with the board model flying the quad." }
+      ]
+    },
+    {
+      "slug": "ping-pong-launcher",
+      "title": "Ping pong launcher",
+      "summary": "Ball flight with drag, Magnus lift and spin decay, and a solver that picks the shot.",
+      "context": "Personal project",
+      "when": "2026",
+      "tools": "MATLAB",
+      "status": "Simulation",
+      "current": "Simulation",
+      "repo": "https://github.com/AaronDoubert/ping-pong-trajectory",
+      "body": [
+        { "p": "Flight integrated with drag, Magnus lift and spin decay. A solver works backward from a target cup to a launch speed and spin; the launcher side sizes the flywheels for a three-wheel head." },
+        { "note": "No figures yet. Export main.m sections 2–3, the sweep plot and the animation GIF into img/, then add them to \"shots\" in projects.json." }
+      ],
+      "shots": []
+    },
+    {
+      "slug": "payload-winch",
+      "title": "PART payload winch",
+      "summary": "Single-servo winch that lowers a payload under a 5 g limit and releases itself.",
+      "context": "Purdue Aerial Robotics",
+      "when": "Spring 2026",
+      "tools": "SolidWorks",
+      "status": "Complete",
+      "body": [
+        { "p": "Replaced a rack-and-pinion gate concept with a 270° servo winch and a self-freeing TPU belt that unhooks from the spool pins. Became the team design. The three-pin belt is statically indeterminate; the 295 mm belt prints curved to fit the bed." }
+      ],
+      "shots": [
+        { "img": "pl-final.jpg",        "cap": "Final version on its rail mount.", "tone": "grey", "size": "wide" },
+        { "img": "pl-winch-v2.jpg",     "cap": "One servo, spool and TPU retention belt." },
+        { "img": "pl-rail.jpg",         "cap": "Rail clip and slider, printed as separate parts for strength." },
+        { "img": "pl-sliding-wall.jpg", "cap": "The sliding-wall deployer (v4) that came before the winch." },
+        { "img": "pl-stand.jpg",        "cap": "Demo test stand." }
+      ]
+    },
+    {
+      "slug": "electronics-labs",
+      "title": "Metal detector and audio equalizer",
+      "summary": "A two-555 beat-frequency metal detector and a 3-band audio EQ.",
+      "context": "ECE 20007",
+      "when": "Spring 2026",
+      "tools": "LTspice, bench",
+      "status": "Complete",
+      "body": [
+        { "p": "The detector oscillated at 71 kHz against a 50 kHz target and the square-wave mixing didn't beat cleanly, so the concept was proved in LTspice instead. The 3-band equalizer is the cleaner piece of the two." }
+      ],
+      "shots": [
+        { "img": "ece-detector.jpg",   "cap": "Metal detector on the breadboard.", "photo": true, "size": "wide" },
+        { "img": "ece-detector-b.jpg", "cap": "Second half of the detector circuit.", "photo": true },
+        { "img": "ece-scope.jpg",      "cap": "Mixer output on the scope, from my lab notebook." },
+        { "img": "ece-eq-sch.jpg",     "cap": "3-band audio equalizer schematic." },
+        { "img": "ece-eq-bode.jpg",    "cap": "Measured response of one band." }
+      ]
+    },
+    {
+      "slug": "asme-turret-battlebot",
+      "title": "ASME battlebot and turret",
+      "summary": "An all-plastic spinner bot, a printed ball turret, and running the club as design lead.",
+      "context": "ASME Small Projects",
+      "when": "2025–2026",
+      "tools": "SolidWorks, Fusion 360",
+      "status": "Complete",
+      "body": [
+        { "p": "Horizontal spinner with no metal armour: outrunner through a GT2 belt to a 6 × 1.5 in polycarbonate blade on a 36 mm flange, UHMWPE internals, PETG chassis. Led a four-person team. Now Design Lead — rules, CAD workshops and advising other teams." }
+      ],
+      "shots": [
+        { "img": "asme-turret.jpg",     "cap": "Printed turret with its ball feed chute.", "photo": true, "size": "wide" },
+        { "img": "asme-turret-cad.jpg", "cap": "Turret CAD." },
+        { "img": "asme-bot.jpg",        "cap": "Battlebot Rev 2 — horizontal spinner on a belt drive." },
+        { "img": "asme-chassis.jpg",    "cap": "Rev 2 chassis." }
+      ]
+    },
+    {
+      "slug": "dacora",
+      "title": "Dacora Motors",
+      "summary": "A rear console with a coffee maker that rises out of it, for a luxury EV prototype.",
+      "context": "Mechanical engineering intern",
+      "when": "Winter 2024, Summer 2025",
+      "tools": "SolidWorks",
+      "status": "Complete",
+      "body": [
+        { "p": "A DC motor drives a belt lift on linear rails; limit switches and a current-sensing stop handle the travel. Printed and CNC parts. Also made interface parts adapting the brake pedal and steering column to the vehicle." }
+      ],
+      "shots": [
+        { "img": "dc-console.jpg",     "cap": "Rear console assembly with the lift mechanism.", "size": "wide" },
+        { "img": "dc-console-rev.jpg", "cap": "Revision — 50 mm narrower, longer centre section." },
+        { "img": "dc-cover.jpg",       "cap": "Lift cover." },
+        { "img": "dc-bracket.jpg",     "cap": "Motor bracket." },
+        { "img": "dc-hinge.jpg",       "cap": "Custom door hinge mount." }
+      ]
+    }
+  ],
+
+  "_soon_README": "Shown under 'Currently working on' but with no page yet. Delete an entry once its project exists above with \"current\" set.",
+  "soon": [
+    { "title": "Split-spool hold-down release", "summary": "Siemens NX and MATLAB bolt-load sizing", "note": "Winter break" },
+    { "title": "Grid fin modeling", "summary": "CFD on scale grid fins, behaviour model in Simulink for sizing and controls", "note": "In progress" }
+  ],
+
+  "_collage_README": "Home page grid, in display order. slug must match a project above. photo:true fills the tile (camera photos); omit for CAD renders. tone 'dark' or 'grey' when a render carries its own flat background.",
+  "collage": [
+    { "img": "cs-flap.jpg",          "slug": "ailerons-flaps" },
+    { "img": "afc-pcb.jpg",          "slug": "analog-flight-controller", "tone": "dark" },
+    { "img": "pl-final.jpg",         "slug": "payload-winch", "tone": "grey" },
+    { "img": "asme-turret.jpg",      "slug": "asme-turret-battlebot", "photo": true },
+    { "img": "cs-flap-horn.jpg",     "slug": "ailerons-flaps" },
+    { "img": "ece-detector.jpg",     "slug": "electronics-labs", "photo": true },
+    { "img": "dc-console.jpg",       "slug": "dacora" },
+    { "img": "afc-shim.jpg",         "slug": "analog-flight-controller", "photo": true },
+    { "img": "cs-flap-xray.jpg",     "slug": "ailerons-flaps" },
+    { "img": "pl-rail.jpg",          "slug": "payload-winch" },
+    { "img": "ece-eq-sch.jpg",       "slug": "electronics-labs" },
+    { "img": "afc-mounting.jpg",     "slug": "analog-flight-controller" },
+    { "img": "asme-bot.jpg",         "slug": "asme-turret-battlebot" },
+    { "img": "pl-stand.jpg",         "slug": "payload-winch" },
+    { "img": "dc-console-rev.jpg",   "slug": "dacora" }
+  ]
+}

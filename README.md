@@ -1,148 +1,137 @@
 # aarondoubert.github.io
 
-Portfolio site. Jekyll, built by GitHub Pages straight from `main` — push and it's live in
-about a minute. No Actions workflow, no build step on your machine.
+Portfolio. Plain HTML and one stylesheet, generated from `projects.json`. No Jekyll, no build
+on GitHub's side — the files in this repo are the site. Push and it's live in about a minute.
 
-Live at <https://aarondoubert.github.io>
+<https://aarondoubert.github.io>
 
 ---
 
 ## Adding a project
 
-One file. Create `_projects/your-slug.md`:
-
-```yaml
----
-slug: grid-fin                      # must be unique; the collage refers to it
-order: 8                            # position in the sidebar and in prev/next
-title: Grid fin modeling
-summary: One line. Shows under the title and on the home cards.
-context: Personal project
-when: 2026
-tools: Fusion 360, Simulink
-status: In progress
-current: In progress                # delete this line if it shouldn't show under
-                                    # "Currently working on"
-repo: https://github.com/AaronDoubert/gridfinModeling   # optional
-
-hero:
-  src: gf-assembly.jpg              # a file in assets/img/
-  alt: Grid fin assembly.
-  caption: Grid fin assembly.
-
-shots:
-  - src: gf-cfd.jpg
-    alt: Pressure field on one fin.
-    caption: Pressure field on one fin.
-  - src: gf-sweep.jpg
-    alt: Hinge moment against deflection.
-    caption: Hinge moment against deflection.
-    full: true                      # spans both gallery columns
----
-
-Two or three sentences, if the images don't say it. That's all this needs.
+```powershell
+python tools/build.py new grid-fin "Grid fin modeling"
 ```
 
-Commit and push. The sidebar, the numbering, prev/next and the page itself all follow from
-`order` — nothing else to update.
+That adds an entry to `projects.json` and writes `projects/grid-fin.html`. Then open
+`projects.json`, fill in its `summary`, `context`, `when`, `tools`, `status`, and list its
+pictures under `shots`. Put the image files in `img/` first.
 
-Then, to put its images on the home page, add rows to `_data/collage.yml`.
+```powershell
+python tools/build.py
+```
+
+Rebuilds every page. Sidebar, nav order, previous/next and the home page all follow from
+`projects.json` — there is nothing else to update, and no HTML to hand-edit. Anything you type
+directly into `index.html` or `projects/*.html` gets overwritten on the next build.
+
+### A project entry
+
+```json
+{
+  "slug": "grid-fin",
+  "title": "Grid fin modeling",
+  "summary": "One line, shown under the title and on the home cards.",
+  "context": "Personal project",
+  "when": "2026",
+  "tools": "Fusion 360, Simulink",
+  "status": "In progress",
+  "current": "In progress",
+  "repo": "https://github.com/AaronDoubert/gridfinModeling",
+  "body": [
+    { "h": "A heading" },
+    { "p": "A paragraph." },
+    { "note": "A grey callout, for things still to do." },
+    { "table": { "head": ["Thing", "Case", "Value"],
+                 "rows": [["Row", "Condition", "1.0 unit"]] } }
+  ],
+  "shots": [
+    { "img": "gf-assembly.jpg", "cap": "First one is the big image at the top." },
+    { "img": "gf-cfd.jpg",      "cap": "The rest become the gallery." },
+    { "img": "gf-sweep.jpg",    "cap": "Full width.", "size": "wide" }
+  ]
+}
+```
+
+Drop `current` if it shouldn't appear under "Currently working on". Drop `body` entirely if the
+pictures say it. The last column of a table is right-aligned in mono, for numbers.
 
 ### Image options
 
 | Option | Use it when |
 |---|---|
-| *(nothing)* | A CAD render on white. The frame is white, so the part floats in it. |
-| `photo: true` | A camera photo. Fills the tile edge to edge instead of fitting inside it. |
-| `tone: dark` | The render has its own black ground — a KiCad 3D board, say. |
-| `tone: grey` | The render has a flat grey ground, like a raw SolidWorks viewport grab. |
+| *(nothing)* | A CAD render on white. The tile is white too, so the part floats in it. |
+| `"photo": true` | A camera photo. Fills the tile instead of fitting inside it. |
+| `"tone": "dark"` | The render has its own black ground, like a KiCad 3D board. |
+| `"tone": "grey"` | The render has a flat grey ground, like a raw SolidWorks viewport grab. |
+| `"size": "wide"` | Gallery image spans both columns. |
 
-`tone` exists so an image with a baked-in background bleeds to the tile edge rather than
-sitting in it as a hard rectangle.
+`tone` stops an image with a baked-in background sitting in the tile as a hard rectangle.
+
+### Other commands
+
+```powershell
+python tools/build.py list
+```
+
+Shows every project, its status and how many pictures it has, so it's obvious which pages are
+still thin.
 
 ---
 
-## Preparing images
+## Light and dark
 
-Site images are JPEGs, 1400 px on the long edge. Convert a raw screenshot with:
+Both. The site follows the visitor's system setting, and the button at the bottom of the sidebar
+overrides it; that choice is remembered in their browser. The theme is set before the page paints,
+so there's no flash.
+
+Colours are CSS variables at the top of `style.css` — one block for light, one for dark. On dark,
+CAD renders sit on a slightly dimmed off-white mat (`--mat` plus `--dim`) so they don't glare.
+
+---
+
+## Images
+
+Site images are JPEGs, 1400 px on the long edge. To bring in a new screenshot:
 
 ```powershell
-python "..\tools\prep_images.py" "C:\Users\doubi\Documents\Portfolio Content\02_PART_Control_Surfaces\renders\new" assets\img --prefix cs-
+python "..\tools\prep_images.py" "C:\Users\doubi\Documents\Portfolio Content\02_PART_Control_Surfaces\renders\new" img --prefix cs-
 ```
 
-It trims the white margin, scales, and writes an optimised JPEG. `--crop left,top,right,bottom`
-shaves CAD UI (view cube, toolbar) off first. `--help` for the rest.
+Trims the white margin, scales, writes an optimised JPEG. `--crop left,top,right,bottom` shaves
+CAD UI off first. `--help` for the rest.
 
 Prefixes in use: `cs-` control surfaces, `pl-` payload, `afc-` flight controller, `dc-` Dacora,
 `asme-` battlebot, `ece-` electronics labs.
 
 ---
 
-## Where everything lives
+## Where things are
 
 | What | Where |
 |---|---|
-| A project's content and images | `_projects/<slug>.md` |
-| Home page intro | `index.md` |
-| Home page image grid | `_data/collage.yml` |
-| "Currently working on" with no page yet | `_data/soon.yml` |
-| Name, email, LinkedIn, GitHub, resume | `_config.yml` under `author:` |
-| Colours, type, spacing | `_sass/_style.scss` |
-| Page structure | `_layouts/`, `_includes/sidebar.html` |
-| Images | `assets/img/` |
-| Fonts | `assets/fonts/` (self-hosted, no third-party requests) |
+| All content | `projects.json` |
+| Generator | `tools/build.py` |
+| Colours, type, layout | `style.css` |
+| Theme button behaviour | `theme.js` |
+| Images | `img/` |
+| Fonts | `fonts/` — Archivo and Chivo Mono, self-hosted, no third-party requests |
+| Generated pages | `index.html`, `projects/*.html` — don't edit these |
 
-Changing anything in `_config.yml` changes it on every page at once.
+`.nojekyll` tells GitHub Pages to serve the files as they are rather than running Jekyll over them.
 
 ---
 
-## The resume link
+## Still to do
 
-The sidebar Resume link is switched off. To turn it on, drop `resume.pdf` in the repo root and
-uncomment the `resume:` line in `_config.yml`. Note the repo is public, so anything you commit
-is downloadable — scrub the phone number first.
-
----
-
-## Type
-
-Self-hosted, no Google Fonts requests at runtime:
-
-- **Newsreader** — headings, titles, the lead paragraph
-- **Archivo** — body text
-- **Chivo Mono** — specs, captions, labels, numbers
-
-To swap one, drop a `.woff2` in `assets/fonts/` and change the `@font-face` block and the
-`$display` / `$body` / `$mono` variables at the top of `_sass/_style.scss`.
-
----
-
-## Running it locally (optional)
-
-Needs Ruby, which isn't installed on this machine. If you want it:
-
-```powershell
-winget install RubyInstallerTeam.RubyWithDevKit
-```
-
-then
-
-```powershell
-bundle install
-```
-
-```powershell
-bundle exec jekyll serve --livereload
-```
-
-Pushing to `main` and waiting a minute works just as well, and is what's been used so far.
-
----
+- Resume link is off. Set `"resume": "resume.pdf"` in `projects.json` and put the file in the repo
+  root. The repo is public, so scrub the phone number first.
+- Ping pong launcher has no pictures and a live page.
+- Aileron images are the weak half of the control-surfaces page. See
+  `..\notes\CAD_SHOT_LIST.md`.
 
 ## History
 
-Supersedes two earlier attempts, both still on disk under `Documents\My Website`:
-
-- `minimal-site/` — hand-written static HTML with a `projects.json` plus `tools/add_project.py`
-  generator. Replaced by this. Its `add_project.py` and `sync` no longer apply.
-- `site/` — the al-folio Jekyll site, now in the private repo `portfolio-al-folio`. Untouched.
+Two earlier versions are still on disk under `Documents\My Website`, untouched: `minimal-site/`
+(this layout's origin) and `site/` (al-folio, now the private repo `portfolio-al-folio`). Neither
+feeds this site.
