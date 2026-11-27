@@ -1,0 +1,51 @@
+---
+layout: default
+---
+{%- assign ordered = site.projects | sort: "order" -%}
+
+<div class="p-head">
+  {{ content }}
+</div>
+
+{%- assign nowlist = ordered | where_exp: "p", "p.current" -%}
+{%- if nowlist.size > 0 or site.data.soon %}
+<h2 class="section">Currently working on</h2>
+<ul class="now">
+  {%- for p in nowlist %}
+  <li><a href="{{ p.url | relative_url }}">
+    <b>{{ p.title }}</b>
+    <span>{{ p.summary | strip_html | remove: '.' }}</span>
+    <em>{{ p.current }}</em>
+  </a></li>
+  {%- endfor %}
+  {%- for s in site.data.soon %}
+  <li><div class="inert">
+    <b>{{ s.title }}</b>
+    <span>{{ s.summary }}</span>
+    <em>{{ s.note }}</em>
+  </div></li>
+  {%- endfor %}
+</ul>
+{%- endif %}
+
+{%- if site.data.collage and site.data.collage.size > 0 %}
+<h2 class="section">Selected work</h2>
+<div class="grid">
+  {%- for c in site.data.collage %}
+  {%- assign proj = ordered | where: "slug", c.slug | first %}
+  {%- if proj %}
+  <div class="card{% if c.size %} {{ c.size }}{% endif %}">
+    <a href="{{ proj.url | relative_url }}">
+      <span class="frame{% if c.photo %} photo{% endif %}">
+        <img src="{{ c.img | prepend: '/assets/img/' | relative_url }}" alt="{{ proj.title }}" loading="lazy">
+      </span>
+      <span class="meta">
+        <b>{{ proj.title }}</b>
+        <small>{{ proj.tools }}</small>
+      </span>
+    </a>
+  </div>
+  {%- endif %}
+  {%- endfor %}
+</div>
+{%- endif %}

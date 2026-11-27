@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% if page.title and page.url != '/' %}{{ page.title }} &middot; {{ site.title }}{% else %}{{ site.title }} &middot; {{ site.author.role }}{% endif %}</title>
+<meta name="description" content="{% if page.summary %}{{ page.summary | strip_html | strip_newlines }}{% else %}{{ site.description | strip_newlines }}{% endif %}">
+<meta name="author" content="{{ site.author.name }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="{% if page.title and page.url != '/' %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+<meta property="og:description" content="{% if page.summary %}{{ page.summary | strip_html | strip_newlines }}{% else %}{{ site.description | strip_newlines }}{% endif %}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+{%- if page.hero %}
+<meta property="og:image" content="{{ page.hero.src | prepend: '/assets/img/' | absolute_url }}">
+{%- endif %}
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preload" href="{{ '/assets/fonts/newsreader.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ '/assets/fonts/archivo.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23fbfaf8'/><text y='23.5' x='16' text-anchor='middle' font-family='Georgia,serif' font-size='21' fill='%2317110c'>A</text></svg>">
+</head>
+<body>
+<div class="shell">
+{% include sidebar.html %}
+<main class="content">
+{{ content }}
+</main>
+</div>
+</body>
+</html>

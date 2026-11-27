@@ -1,0 +1,44 @@
+title: Aaron Doubert
+tagline: Mechanical engineering · Purdue University
+description: >-
+  Aaron Doubert, mechanical engineering at Purdue University.
+  Control surfaces, mechanism design and analog electronics.
+url: "https://aarondoubert.github.io"
+baseurl: ""
+lang: en
+
+author:
+  name: Aaron Doubert
+  role: Mechanical engineering
+  school: Purdue University
+  grad: Dec 2027
+  location: West Lafayette, IN
+  email: adoubert@purdue.edu
+  linkedin: https://www.linkedin.com/in/aaron-doubert
+  github: https://github.com/AaronDoubert
+  # resume: resume.pdf   # uncomment once a PDF is in the repo root
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+
+sass:
+  style: compressed
+  sass_dir: _sass
+
+plugins:
+  - jekyll-sitemap
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
